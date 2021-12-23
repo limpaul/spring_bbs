@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<bean id="userBean" class="com.board.www.bbs.UserBean" />
+	<bean id="calc1" class="com.board.www.bbs.calc.Calculator" />
+	<bean id="calc2" class="com.board.www.bbs.calc.Calculator2" />
+<!-- 	<bean id="user" class="com.board.www.bbs.calc.User"> -->
+<!-- 		<constructor-arg index="0" value="test" /> -->
+<!-- 		<constructor-arg index="1" value="23" /> -->
+<!-- 		<constructor-arg index="2" value="남" /> -->
+<!-- 	</bean> -->
+	<bean id="user" class="com.board.www.bbs.calc.User">
+		<constructor-arg type="java.lang.String" value="test" />
+		<constructor-arg type="int" value="23" />
+		<constructor-arg type="char" value="남" />
+		<property name="name" value="toto" />
+		<property name="calc" ref="calc2"/>
+	</bean>
+</beans>
+
+

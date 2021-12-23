@@ -1,0 +1,22 @@
+use bbs;
+create table user(
+	userID varchar(20),
+    userpassword varchar(20),
+    userName varchar(20),
+    userGender varchar(20),
+    userEmail varchar(20),
+    primary key(userID)
+);
+desc user;
+
+create table Bbs(
+	bbsID int primary key auto_increment,
+    bbsTitle varchar(20),
+    userID varchar(20),
+    bbsDate datetime default now(),
+    bbsContent varchar(2048),
+    bbsSecret varchar(40),
+    bbsAvailable int
+);
+
+desc bbs;

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+div{
+    border: 1px solid #999999;
+    padding: 10px 10px 10px 800px
+}
+p{
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 50px;
+}
+input[type='text']{
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    outline: 1px solid #999999;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+input[type='submit']{
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    outline: 1px solid #999999;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    cursor:pointer;
+}
+input[type='password']{
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    outline: 1px solid #999999;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+input[type='text']:hover{
+    padding-left: 20px;
+}
+input[type='password']:hover{
+    padding-left: 20px;
+}
+input[type='submit']{
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+select{
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    outline: 1px solid #999999;
+    border: none;
+    margin: 5px 5px 5px 5px;
+}
+a{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    display: block;
+    text-decoration: none;
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 50px;
+    margin: 0px 0px 0px 5px
+}
+button{
+    color: black;
+    font-weight: bold;
+    width: 80px;
+    height: 50px;
+    border-radius: 20px;
+    outline: 1px solid #999999;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    outline: #FFDD00;
+    background-color: #FFDD00;
+}

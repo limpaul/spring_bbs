@@ -1,32 +1,47 @@
 package com.board.www.bbs.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Bbs {
 	private int bbsID;
 	private String bbsTitle;
 	private String userID;
 	private String bbsDate;
 	private String bbsContent;
+	@JsonIgnore
 	private String bbsSecret;
 	private int bbsAvailable;
+	private int bbsRecommend;
+	private int bbsVisited;
 	public Bbs() {
 		
 	}
-	public Bbs(int bbsID, String bbsTitle, String userID, String bbsDate, String bbsContent, String bbsSecret) {
+	public Bbs(int bbsID, String bbsTitle, String userID, 
+			String bbsDate, String bbsContent, String bbsSecret, 
+			int bbsRecommend, int bbsVisited) {
+		
 		this.bbsID = bbsID;
 		this.bbsTitle = bbsTitle;
 		this.userID = userID;
 		this.bbsDate = bbsDate;
 		this.bbsContent = bbsContent;
 		this.bbsSecret = bbsSecret;
+		this.bbsRecommend = bbsRecommend;
+		this.bbsVisited = bbsVisited;
 	}
 	public Bbs(int bbsID, String bbsTitle, String userID,
-			String bbsDate, String bbsContent) {
+			String bbsDate, String bbsContent,
+			int bbsRecommend, int bbsVisited) {
+		
 		this.bbsID = bbsID;
 		this.bbsTitle = bbsTitle;
 		this.userID = userID;
 		this.bbsDate = bbsDate;
 		this.bbsContent = bbsContent;
+		this.bbsRecommend = bbsRecommend;
+		this.bbsVisited = bbsVisited;
 	}
+	
 	public int getBbsID() {
 		return bbsID;
 	}
@@ -70,10 +85,23 @@ public class Bbs {
 	public void setBbsAvailable(int bbsAvailable) {
 		this.bbsAvailable = bbsAvailable;
 	}
+	public int getBbsRecommend() {
+		return bbsRecommend;
+	}
+	public void setBbsRecommend(int bbsRecommend) {
+		this.bbsRecommend = bbsRecommend;
+	}
+	public int getBbsVisited() {
+		return bbsVisited;
+	}
+	public void setBbsVisited(int bbsVisited) {
+		this.bbsVisited = bbsVisited;
+	}
 	@Override
 	public String toString() {
 		return "Bbs [bbsID=" + bbsID + ", bbsTitle=" + bbsTitle + ", userID=" + userID + ", bbsDate=" + bbsDate
-				+ ", bbsContent=" + bbsContent + ", bbsSecret=" + bbsSecret + ", bbsAvailable=" + bbsAvailable + "]";
+				+ ", bbsContent=" + bbsContent + ", bbsSecret=" + bbsSecret + ", bbsAvailable=" + bbsAvailable
+				+ ", bbsRecommend=" + bbsRecommend + ", bbsVisited=" + bbsVisited + "]";
 	}
 	
 	

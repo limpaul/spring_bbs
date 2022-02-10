@@ -28,11 +28,13 @@ import com.board.www.bbs.dao.UserDao;
 @ComponentScan(basePackages = { "com.board.www.bbs.controller",
 								"com.board.www.bbs.service", 
 								"com.board.www.bbs.repository",
-								"com.board.www.bbs.dao"})
+								"com.board.www.bbs.dao",				
+								})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
+        // url 요청이 ex) /resources/css 로 들어왔을 떄 
+		registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
         registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
         registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
         registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
@@ -80,7 +82,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     	return sfb.getObject();
     }
     @Bean
-    public SqlSessionTemplate seqlSession() throws Exception {
+    public SqlSessionTemplate sqlSession() throws Exception {
     	return new SqlSessionTemplate(sqlSessionFactory());
     }
    

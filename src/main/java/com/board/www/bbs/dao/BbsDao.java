@@ -75,7 +75,9 @@ public class BbsDao {
 				String userID = rs.getString("userID");
 				String bbsDate = rs.getString("bbsDate");
 				String bbsContent = rs.getString("bbsContent");
-				Bbs bbs = new Bbs(bbsID, bbsTitle, userID, bbsDate, bbsContent);
+				int bbsRecommend = rs.getInt("bbs_recommend");
+				int bbsVisited = rs.getInt("bbs_visited");
+				Bbs bbs = new Bbs(bbsID, bbsTitle, userID, bbsDate, bbsContent, bbsRecommend, bbsVisited);
 				list.add(bbs);
 			}
 		} catch (SQLException e) {
@@ -100,7 +102,10 @@ public class BbsDao {
 				String bbsDate = rs.getString("bbsDate");
 				String bbsContent = rs.getString("bbsContent");
 				String bbsSecret = rs.getString("bbsSecret");
-				Bbs bbs = new Bbs(bbsID2, bbsTitle, userID, bbsDate, bbsContent, bbsSecret);
+				int bbsRecommend = rs.getInt("bbs_recommend");
+				int bbsVisited = rs.getInt("bbs_visited");
+				
+				Bbs bbs = new Bbs(bbsID2, bbsTitle, userID, bbsDate, bbsContent, bbsSecret, bbsRecommend, bbsVisited);
 				return bbs;
 			}
 		} catch (SQLException e) {

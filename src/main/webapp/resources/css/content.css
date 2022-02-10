@@ -1,0 +1,104 @@
+@charset "UTF-8";
+div{
+    padding: 0px 0px 0px 400px;
+}
+div h1{
+    padding: 0px 0px 0px 400px;
+}
+li{
+    width: 800px;
+    margin: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+li:nth-of-type(1){
+    height: 50px;
+}
+li:nth-of-type(2){
+    height: 300px;
+}
+li:nth-of-type(3){
+    border: none;
+    padding: 0px 0px 0px 280px;
+}
+li:nth-of-type(3) button{
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+}
+li:nth-of-type(4){
+    border: none;
+    padding: 0px 0px 0px 150px;
+}
+li:nth-of-type(3) button:nth-child(1){
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    color: #fff;
+}
+li:nth-of-type(3) button:nth-child(2){
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+li:nth-of-type(3) button:nth-child(3){
+    background-color: #35dc7b;
+    border-color: #35dc7b;
+    color: #fff;
+}
+li:nth-of-type(4){
+    border: none;
+    height: 50px;
+}
+li:nth-of-type(4) input{
+    width: 400px;
+    height: 35px;
+    margin: 5px;
+    border-radius: 20px;
+    border:none;
+    outline: 1px solid #999999;
+}
+li:nth-of-type(4) button{
+    width: 80px;
+    height: 40px;
+    border:none;
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    color: #fff;
+    border-radius: 20px;
+}
+#reviews > p > button:nth-last-child(1){
+    float: right;
+    width: 40px;
+    height: 20px;
+    border:none;
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    color: #fff;
+    border-radius: 20px;
+}
+
+#reviews > p > button:nth-last-child(2){
+    float: right;
+    width: 40px;
+    height: 20px;
+    border:none;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+    border-radius: 20px;
+}
+#reviews > p > button:nth-last-child(3){
+    float: right;
+    width: 40px;
+    height: 20px;
+    border:none;
+    background-color: #35dc7b;
+    border-color: #35dc7b;
+    color: #fff;
+    border-radius: 20px;
+}
+#reviews > p > b{
+    font-size: 8px;
+}

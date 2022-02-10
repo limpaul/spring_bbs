@@ -1,16 +1,33 @@
-![image](https://user-images.githubusercontent.com/37106871/147412079-197bd6cf-a91a-4853-ad1f-05249108dfd6.png)
+IDE : eclipse, vscode
+DB: H2DB, MYSQL
+API : NAVER SEARCH ENGINE API
+LANGUAGE: HTML , JAVASCRIPT, CSS JAVA
+FRAMEWORK: SPRING 
 
-![image](https://user-images.githubusercontent.com/37106871/147412083-9fa531b9-258e-4d3d-90ee-368cfc751956.png)
+메인 페이지 
 
-![image](https://user-images.githubusercontent.com/37106871/147412085-3f84398a-2e3b-4407-bef6-3aedc70827ac.png)
+![image](https://user-images.githubusercontent.com/37106871/153354323-77daa158-e3f2-4f67-8798-bc0fc9c95765.png)
 
-![image](https://user-images.githubusercontent.com/37106871/147412090-457e02eb-1daa-4b22-a4e2-1d4fcb96fe26.png)
+로그인페이지
 
-![image](https://user-images.githubusercontent.com/37106871/147412095-8f46940e-4f04-444d-9c4f-e3ac095c9642.png)
-
-![image](https://user-images.githubusercontent.com/37106871/147412103-377815d4-32db-4b2b-8222-5e40f376117e.png)
+![image](https://user-images.githubusercontent.com/37106871/153354402-48896783-ab0b-4da1-868d-18c59cc0bc0c.png)
 
 
-![image](https://user-images.githubusercontent.com/37106871/147412107-4f666422-d2b4-4434-9fae-8b771d66389c.png)
+회원가입페이지
 
-![image](https://user-images.githubusercontent.com/37106871/147412109-f92d9dae-d2c5-4621-aa3a-096c5a6755d0.png)
+![image](https://user-images.githubusercontent.com/37106871/153354492-8ad4788d-ea73-4e0d-8fab-fff4a30e7577.png)
+
+
+게시판페이지
+
+![image](https://user-images.githubusercontent.com/37106871/153354551-9c6fdc5f-f928-4111-b9cd-69dbb419888e.png)
+
+
+![image](https://user-images.githubusercontent.com/37106871/153354614-0b072f4a-3749-43a1-9721-805e8a0a6671.png)
+
+
+
+전체 Entity 구성도 
+![image](https://user-images.githubusercontent.com/37106871/153355654-0492a512-2576-46c7-8a8a-f26bf4c1a132.png)
+
+

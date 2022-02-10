@@ -29,7 +29,7 @@ public class BoardController {
 		return "list";
 	}
 	@GetMapping("/content")
-	public String content(@RequestParam("bbsID")String bbsID ,Model model) {
+	public String content(@RequestParam("bbs_id")String bbsID ,Model model) {
 		bbsService.updateBbs(Integer.parseInt(bbsID), model);
 		return "content";
 	}

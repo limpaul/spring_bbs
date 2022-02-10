@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.board.www.bbs.dao.BbsDao;
 import com.board.www.bbs.dao.IDao;
 import com.board.www.bbs.dto.Bbs;
+import com.board.www.bbs.dto.Review;
 
 @Repository
 public class BoardRepository {
@@ -26,7 +27,6 @@ public class BoardRepository {
 	
 	
 	public List<Bbs> freeListPage() {
-		//return bbsDao.getList();
 		return iDao.getList();
 	}
 	public int bbsWrite(Bbs bbs) {
@@ -37,6 +37,7 @@ public class BoardRepository {
 		Bbs bbs = iDao.findById(bbsID);
 		return bbs;
 	}
+	
 //	public int bbsUpdate(int bbsID){
 //		int result = bbsDao.bbsUpdate(bbsID);
 //		return result;

@@ -18,7 +18,18 @@
                 <button>비추천</button>
                 <button>삭제</button>
             </li>
-            <li><input id="review" type="text" placeholder="write review"><button onclick="writeReview()">댓글달기</button></li>
+            <%
+            	String sessionID = (String)session.getAttribute("userID");
+            	if(sessionID == null){
+            %>
+            	<li><input id="review" type="text" placeholder="write review"><button onclick="login()">댓글달기</button></li>
+            <%
+            	}else{
+            %>
+            	<li><input id="review" type="text" placeholder="write review"><button onclick="writeReview('<%=sessionID%>')">댓글달기</button></li>
+            <%
+            	}
+            %>
             <li id="reviews">
               <p> [댓글] </p>
             </li>

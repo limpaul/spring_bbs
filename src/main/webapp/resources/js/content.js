@@ -1,10 +1,16 @@
 
 
-function writeReview(){ // 댓글 달기 기능 
+function login(){
+	$(location).attr('href', '/bbs/login');
+}
+function writeReview(sessionID){ // 댓글 달기 기능 
    const bbsId = $(location).attr("search").split("=")[1]; // bbs_id
    const reviewContent = $('#review').val();
-   const userId = "test";
+   const userId = sessionID;
    
+   if(sessionID == null){
+		$(location).attr('href', '/bbs/login');
+   }
    const sendData = {
        userId,
        reviewContent,
@@ -22,36 +28,41 @@ function writeReview(){ // 댓글 달기 기능
    
 }
 function model_board(data){
-    const bbsID = data.bbsID;
+    const bbsId = data.bbsID;
     const bbsTitle = data.bbsTitle;
-    const userID = data.userID;
+    const userId = data.userID;
     const bbsDate = data.bbsDate;
     const bbsContent = data.bbsContent;
     var bbsRecommend = data.bbsRecommend;
     var bbsVisited = data.bbsVisited;
+
+    // bbs setting
     $('div > ul > li:nth-child(1)')
-    .html(`제목 ${bbsTitle}  아이디: ${userID} 추천수: ${bbsRecommend}  조회수: ${bbsVisited} ${bbsDate}`);
+    .html(`제목 ${bbsTitle}  아이디: ${userId} 추천수: ${bbsRecommend}  조회수: ${bbsVisited} ${bbsDate}`);
 
     $('div > ul > li:nth-child(2)')
     .html(`${bbsContent}`);
-}
-function model_board_review(data){
+
+
+    //review setting
+    const reviews = data.reviews;
+    const reviews_length = reviews.length;
     var html ="";
-    for(var i = 0 ; i < data.length; i++){
-        const reviewId = data[i].reviewId;
-        const bbsId = data[i].bbsId;
-        const userId = data[i].userId;
-        const reviewContent = data[i].reviewContent;
-        const reviewDate = data[i].reviewDate;
-        const reviewRecommend = data[i].reviewRecommend;
+    for(var i = 0 ; i < reviews_length ; i++){
+        const reviewId = reviews[i].reviewId;
+        const reviewContent = reviews[i].reviewContent;
+        const reviewDate = reviews[i].reviewDate;
+        const reviewRecommend = reviews[i].reviewRecommend;
         html += 
         `
            <p> ${reviewId} ${userId} ${reviewContent}<b> ${reviewDate} 추천수: ${reviewRecommend}</b> <button>삭제</button><button>비추천</button><button>추천</button></p>
         `
     }
+    // review modeling
     $('div > ul > li:nth-child(5)')
-    .append(html);   
+    .append(html); 
 }
+
 
 function searchBoardById(bbs_id){
     const url = `http://localhost:8080/bbs/api/bbs/${bbs_id}`
@@ -64,21 +75,10 @@ function searchBoardById(bbs_id){
         }
     })
 }
-function searchReviewBybbsId(bbs_id){
-    const url = `http://localhost:8080/bbs/api/review/${bbs_id}`
-    $.ajax({
-        method:'get',
-        url,
-        success: function(data){
-            console.log(data);
-            model_board_review(data);
-        }
-    })
-}
+
 
 
 $(document).ready(()=>{
     const bbs_id = $(location).attr('search').split('=')[1];
     searchBoardById(bbs_id);
-    searchReviewBybbsId(bbs_id);
 })

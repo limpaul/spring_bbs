@@ -23,7 +23,7 @@ public class ApiService {
 	}
 
 	public List<Bbs> getBoardList() {
-		return iDao.getList();
+		 return iDao.getList();
 	}
 
 	public String removeBbs(Map<String, String> removeBbs) {
@@ -48,17 +48,41 @@ public class ApiService {
 	}
 
 	public List<Review> getReviewList(int bbsId) {
+		
 		return iDao.findReviewById(bbsId);
 	}
 
 	public Bbs findBoardById(int bbsId) {
-		// TODO Auto-generated method stub
-		return iDao.findById(bbsId);
+		Bbs findBbs = iDao.findById(bbsId); // 게시판을 id로 조회한다..
+		List<Review> findReviews = iDao.findReviewById(bbsId); // review 정보를 불러온다 
+		findBbs.setReviews(findReviews); // 게시판에 review 정보를넣어준다.
+		
+		return findBbs;
 	}
 
 	public void writeReview(int bbsId, Review review) {
 		review.setBbsId(bbsId); // bbsId 설정.
 		iDao.writeReview(review);
+	}
+
+	/*
+	 * public String recommed(int bbsId, Map<String, Object> map) { // TODO: 추천 기능
+	 * 이미 했거나 추후 작성 String userId = (String)map.get("userId"); // 추천자를 가져온다. // 이미
+	 * 추천을 했으면? boolean isOk = iDao.verifyRecommend(bbsId, userId); // 어느 게시판 추천자인지
+	 * 확인
+	 * 
+	 * //추천을 했거나 아니거나 if(isOk) { // 추천을 하지 않았으면 긍정 또는 부정. String choice =
+	 * (String)map.get("choice"); int like_unlike = postiveOrnegative(choice);
+	 * if(like_unlike == 1) { iDao.bbsLike(bbsId, like_unlike); }else {
+	 * iDao.bbsUnLike(bbsId, like_unlike); } return "{}"; }else { return
+	 * "이미 추천을 하셨습니다."; } }
+	 */
+	private int postiveOrnegative(String value) {
+		if(value == "true") {
+			return 1;
+		}else {
+			return -1;
+		}
 	}
 	
 }

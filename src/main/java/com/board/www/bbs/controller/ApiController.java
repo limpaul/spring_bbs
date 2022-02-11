@@ -37,7 +37,11 @@ public class ApiController {
 		return apiService.findBoardById(bbsId);
 	}
 	
-	
+	/*
+	 * @PostMapping("/bbs/{bbsId}/like") public String recommed(@PathVariable int
+	 * bbsId, @RequestBody Map<String, Object> map) { return
+	 * apiService.recommed(bbsId, map); }
+	 */
 	
 	@GetMapping("/bbs_list")
 	public List<Bbs> freeListPage() {

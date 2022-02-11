@@ -1,0 +1,27 @@
+[33mcommit c1eb81650cd4ba1e51dbe643a161044442d08e1d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: = <=>
+Date:   Thu Feb 10 16:21:39 2022 +0900
+
+    db sql update and readme update
+
+[33mcommit ff6229afac8720086b41669a9f10803d5d0b0130[m
+Author: = <=>
+Date:   Thu Feb 10 16:13:42 2022 +0900
+
+    update css and javascript and db_logic
+
+[33mcommit 53b393a82587a87c7e418f68fdbf2570760ecf44[m
+Author: = <=>
+Date:   Mon Dec 27 00:04:51 2021 +0900
+
+    readme
+
+[33mcommit 5d0cefd052df0b4dc25495b8370e48c4832ef832[m
+Author: baole <ibw1953@naver.com>
+Date:   Thu Dec 23 10:31:39 2021 +0900
+
+    spring framework 4.x
+    web 3.1
+    was tomcat 8
+    jdk openjdk 8
+    database mysql

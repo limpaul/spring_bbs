@@ -1,5 +1,7 @@
 package com.board.www.bbs.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Bbs {
@@ -13,6 +15,7 @@ public class Bbs {
 	private int bbsAvailable;
 	private int bbsRecommend;
 	private int bbsVisited;
+	private List<Review> reviews;
 	public Bbs() {
 		
 	}
@@ -97,12 +100,20 @@ public class Bbs {
 	public void setBbsVisited(int bbsVisited) {
 		this.bbsVisited = bbsVisited;
 	}
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 	@Override
 	public String toString() {
 		return "Bbs [bbsID=" + bbsID + ", bbsTitle=" + bbsTitle + ", userID=" + userID + ", bbsDate=" + bbsDate
 				+ ", bbsContent=" + bbsContent + ", bbsSecret=" + bbsSecret + ", bbsAvailable=" + bbsAvailable
-				+ ", bbsRecommend=" + bbsRecommend + ", bbsVisited=" + bbsVisited + "]";
+				+ ", bbsRecommend=" + bbsRecommend + ", bbsVisited=" + bbsVisited + ", reviews=" + reviews + "]";
 	}
+	
 	
 	
 }

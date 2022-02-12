@@ -36,26 +36,36 @@ function addTable(data){
         `
             <tr>
             <td>${bbsID}</td>
-            <td><a href='http://localhost:8080/bbs/content.html?bbs_id=${bbsID}'>${bbsTitle}</a></td>
+            <td><a href='http://localhost:8080/bbs/list/${bbsID}'>${bbsTitle}</a></td>
             <td>${userID}</td>
             <td>${bbsDate}</td>
             <td>${bbsRecommend}</td>
             <td>${bbsVisited}</td>
-            <td><button onclick="writeBoard(${bbsID})">삭제</button></td>
+            <td><button onclick="writeBoard(${bbsID})">remove</button></td>
             </tr>
             `;
     }
     $('table > tbody').html(html);
 }
+function bbsPageSet(page){ 
+    var html ="< ";
+    for(var i = 0 ; i < page ; i++){
+        html += `<a href='localhost:8080/bbs/api/bbs_list?page=${i+1}'>${i+1}</a>`;
+    }
+    html += "&nbsp;&nbsp>;"
+    $('#page').html(html);
+}
+
 function getBoardData(){
    $.ajax({
     type:'get',   
     url:'http://localhost:8080/bbs/api/bbs_list',
     success: function(data){
            console.log(data);
-           addTable(data);
+           addTable(data.bbs);
+ 			bbsPageSet(data.bbsPage);
     },
-   })
+	})
    
 }
 $(document).ready(() => {

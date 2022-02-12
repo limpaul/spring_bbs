@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.board.www.bbs.dto.Bbs;
+import com.board.www.bbs.dto.BbsRecommend;
+import com.board.www.bbs.dto.BoardList;
 import com.board.www.bbs.dto.Review;
 import com.board.www.bbs.service.ApiService;
 @CrossOrigin
@@ -34,22 +36,26 @@ public class ApiController {
 	}
 	@GetMapping("/bbs/{bbsId}")
 	public Bbs getBoard(@PathVariable int bbsId) {
+		
 		return apiService.findBoardById(bbsId);
 	}
 	
-	/*
-	 * @PostMapping("/bbs/{bbsId}/like") public String recommed(@PathVariable int
-	 * bbsId, @RequestBody Map<String, Object> map) { return
-	 * apiService.recommed(bbsId, map); }
-	 */
+	@PostMapping("/bbs/{bbsId}/recommend")
+	public String recommed(@PathVariable int bbsId, @RequestBody BbsRecommend bbsRecommend) {
+		return apiService.addRecommend(bbsId, bbsRecommend);
+	}
 	
 	@GetMapping("/bbs_list")
-	public List<Bbs> freeListPage() {
-		return apiService.getBoardList();
+	public BoardList freeListPage() { // 페이지 받아온다
+		return apiService.getBoardList(0);
+		//return apiService.getBoardList(0);
 	}
-	@GetMapping("/review/{bbs_id}")
-	public List<Review> reviewList(@PathVariable("bbs_id") int bbsId){
-		return apiService.getReviewList(bbsId);
+	@GetMapping("/review/{bbs_id}/{page}/{count}")
+	public List<Review> reviewList(
+			@PathVariable("bbs_id") int bbsId,
+			@PathVariable("page") int page,
+			@PathVariable("count") int count){
+		return apiService.getReviewList(bbsId, page, count);
 	}
 	// 댓글 작성 
 	@PostMapping("/review/{bbsId}")

@@ -82,3 +82,7 @@ button{
     background-color: #FFDD00;
     cursor:pointer;
 }
+
+#page{
+    padding: 0px 0px 0px 400px;
+}

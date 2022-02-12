@@ -7,23 +7,34 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.board.www.bbs.dao.BoardDao;
 import com.board.www.bbs.dao.IDao;
 import com.board.www.bbs.dto.Bbs;
+import com.board.www.bbs.dto.BbsRecommend;
+import com.board.www.bbs.dto.BoardList;
 import com.board.www.bbs.dto.Review;
 
 @Service
 public class ApiService {
 	private IDao iDao;
+	private BoardDao myBatisBoardDao;
 	private SqlSession sqlSession;
 
 	@Autowired
 	public ApiService(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 		iDao = sqlSession.getMapper(IDao.class);
+		myBatisBoardDao = sqlSession.getMapper(BoardDao.class);
 	}
 
-	public List<Bbs> getBoardList() {
-		 return iDao.getList();
+	public BoardList getBoardList(int page) {
+		if(page >= 1) {
+			page = page + 5;
+		}
+		BoardList boardList = new BoardList();
+		boardList.setBbs(iDao.getList(page));
+		boardList.setBbsPage(myBatisBoardDao.getBbsCount(5));
+		return boardList;
 	}
 
 	public String removeBbs(Map<String, String> removeBbs) {
@@ -47,16 +58,21 @@ public class ApiService {
 		return "false";
 	}
 
-	public List<Review> getReviewList(int bbsId) {
-		
-		return iDao.findReviewById(bbsId);
+	public List<Review> getReviewList(int bbsId, int page, int count) {
+		page = page - 1;
+		if(page >= 1) {
+			page = page * 5;
+		}
+		return iDao.findReviewById(bbsId, page, count);
 	}
 
 	public Bbs findBoardById(int bbsId) {
 		Bbs findBbs = iDao.findById(bbsId); // 게시판을 id로 조회한다..
-		List<Review> findReviews = iDao.findReviewById(bbsId); // review 정보를 불러온다 
-		findBbs.setReviews(findReviews); // 게시판에 review 정보를넣어준다.
+		int bbsReviewCount = myBatisBoardDao.getBbsReviewCount(bbsId, 5);
 		
+		List<Review> findReviews = iDao.findReviewById(bbsId, 0, 5); // review 정보를 불러온다
+		findBbs.setReviews(findReviews); // 게시판에 review 정보를넣어준다.
+		findBbs.setReviewCount(bbsReviewCount); // 리뷰 페이지 갯수 출력
 		return findBbs;
 	}
 
@@ -65,24 +81,35 @@ public class ApiService {
 		iDao.writeReview(review);
 	}
 
-	/*
-	 * public String recommed(int bbsId, Map<String, Object> map) { // TODO: 추천 기능
-	 * 이미 했거나 추후 작성 String userId = (String)map.get("userId"); // 추천자를 가져온다. // 이미
-	 * 추천을 했으면? boolean isOk = iDao.verifyRecommend(bbsId, userId); // 어느 게시판 추천자인지
-	 * 확인
-	 * 
-	 * //추천을 했거나 아니거나 if(isOk) { // 추천을 하지 않았으면 긍정 또는 부정. String choice =
-	 * (String)map.get("choice"); int like_unlike = postiveOrnegative(choice);
-	 * if(like_unlike == 1) { iDao.bbsLike(bbsId, like_unlike); }else {
-	 * iDao.bbsUnLike(bbsId, like_unlike); } return "{}"; }else { return
-	 * "이미 추천을 하셨습니다."; } }
-	 */
-	private int postiveOrnegative(String value) {
-		if(value == "true") {
-			return 1;
-		}else {
-			return -1;
-		}
+	public List<BbsRecommend> findRecommendById(int bbsId, BbsRecommend bbsRecommend) {
+		bbsRecommend.setBbsId(bbsId); // 추천에 아이디가 존재하는 확인한다.
+		List<BbsRecommend> recommends = iDao.findRecommendByUserId(bbsRecommend.getBbsId());
+		System.out.println(">> rmd: "+recommends);
+		return recommends;
 	}
+
+	public String addRecommend(int bbsId, BbsRecommend rmd) {
+		// 해당 값이 있는지?
+		rmd.setBbsId(bbsId);
+		iDao.addRecommend(rmd);
+		return "{}";
+	}
+	
+	public int getBbsReviewCount(int bbsId, int count) { // 총 리뷰페이지가 몇개인가?
+		 // 기본적으로 5개 기준으로 reviewPage를 몇개 가져올것인지 
+		return myBatisBoardDao.getBbsReviewCount(bbsId, count);
+	}
+//	private void likeOrunLike(BbsRecommend bbsRecommend) {
+//		if(bbsRecommend.getPostive() == 1) {
+//			iDao.plusRecommend();
+//		}else if(bbsRecommend.getNegative() == 1) {
+//			iDao.minusRecommend();
+//		}
+//	}
+
+	public int getBbsCount(int count) {
+		return myBatisBoardDao.getBbsCount(count);
+	}
+	
 	
 }

@@ -67,10 +67,7 @@ public class BbsService {
 		}
 		return viewPage;
 	}
-	public void boardList(HttpServletRequest request) {
-		List<Bbs> list = boardRepository.freeListPage();
-		request.setAttribute("list", list);
-	}
+	
 	public String bbsWrite(Bbs bbs) {
 		int result = boardRepository.bbsWrite(bbs);
 		if(result == 1) {
@@ -79,10 +76,6 @@ public class BbsService {
 			return "write";
 		}
 	}
-	public Bbs updateBbs(int bbsID, Model model) {
-		Bbs bbs = boardRepository.findById(bbsID);
-		model.addAttribute("bbs", bbs);
-		return bbs;
-	}
+
 	
 }

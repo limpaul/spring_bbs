@@ -26,11 +26,10 @@ public class BoardRepository {
 	}
 	
 	
-	public List<Bbs> freeListPage() {
-		return iDao.getList();
-	}
+
 	public int bbsWrite(Bbs bbs) {
 		//return bbsDao.write(bbs);
+		
 		return iDao.write(bbs);
 	}
 	public Bbs findById(int bbsID){

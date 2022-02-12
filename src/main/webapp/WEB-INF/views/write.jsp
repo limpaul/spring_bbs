@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="UTF-8"%>
+	pageEncoding="EUC-KR" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,27 +23,27 @@
 	<div class="container" style="padding-top: 20px; padding-bottom: 40px; font-weight: bold;" >
         <form action="writeAction" method="post" onsubmit="return check()">
         	<div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">ì œëª©</label>
-            <input type="text" name="bbsTitle" class="form-control"  placeholder="ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš” ">
+            <label for="exampleFormControlInput1" class="form-label">Á¦¸ñ</label>
+            <input type="text" name="bbsTitle" class="form-control"  placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä ">
           </div>
     
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">ë‚´ìš©</label>
-            <textarea name="bbsContent" class="form-control"  rows="10" placeholder="ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”"></textarea>
+            <label for="exampleFormControlTextarea1" class="form-label">³»¿ë</label>
+            <textarea name="bbsContent" class="form-control"  rows="10" placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"></textarea>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">ë¹„ë°€ë²ˆí˜¸</label>
+            <label for="exampleFormControlInput1" class="form-label">ºñ¹Ğ¹øÈ£</label>
             <input id='bbsSecret' type="password" name="bbsSecret">
         </div>
-          <input type="submit" value="ë“±ë¡í•˜ê¸°" class="btn btn-primary">
-          <a href="main" class="btn btn-danger">ëª©ë¡ìœ¼ë¡œ</a>
+          <input type="submit" value="µî·ÏÇÏ±â" class="btn btn-primary">
+          <a href="main" class="btn btn-danger">¸ñ·ÏÀ¸·Î</a>
         </form>
     </div>
 	<script type="text/javascript">
 		function check(){
 			var pw = $('#bbsSecret').val();
 			if(pw == ''){
-				alert('ë¹„ë°€ë²ˆí˜¸ë¥¼ ì ì–´ì£¼ì„¸ìš”');
+				alert('ºñ¹Ğ¹øÈ£¸¦ Àû¾îÁÖ¼¼¿ä');
 				return false;	
 			}else{
 				return true;

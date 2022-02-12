@@ -31,6 +31,7 @@
                
             </tbody>
         </table>
+        <div id="page"></div>
         <div class="move">
             <a  href="write">작성하기</a>
             <a href="main">메인으로 돌아가기</a>

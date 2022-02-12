@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,12 +26,12 @@ public class BoardController {
 	
 	@GetMapping(path="/list")
 	public String list(HttpServletRequest request) {
-		bbsService.boardList(request);
+		//bbsService.boardList(request);
 		return "list";
 	}
-	@GetMapping("/content")
-	public String content(@RequestParam("bbs_id")String bbsID ,Model model) {
-		bbsService.updateBbs(Integer.parseInt(bbsID), model);
+
+	@GetMapping("/list/{bbs_id}")
+	public String content(@PathVariable("bbs_id")String bbsId ,Model model) {
 		return "content";
 	}
 	@GetMapping(path = "/write")
@@ -41,6 +42,7 @@ public class BoardController {
 	}
 	@PostMapping(path="/writeAction")
 	public String writeAction(Bbs bbs, HttpServletRequest request) {
+		System.out.println(bbs.toString());
 		HttpSession session = request.getSession();
 		bbs.setUserID((String)session.getAttribute("userID"));
 		bbsService.bbsWrite(bbs);

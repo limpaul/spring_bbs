@@ -16,6 +16,8 @@ public class Bbs {
 	private int bbsRecommend;
 	private int bbsVisited;
 	private List<Review> reviews;
+	private int reviewPage = 1;
+	
 	public Bbs() {
 		
 	}
@@ -107,13 +109,20 @@ public class Bbs {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+	
+	
+	public int getReviewCount() {
+		return reviewPage;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewPage = reviewCount;
+	}
 	@Override
 	public String toString() {
 		return "Bbs [bbsID=" + bbsID + ", bbsTitle=" + bbsTitle + ", userID=" + userID + ", bbsDate=" + bbsDate
 				+ ", bbsContent=" + bbsContent + ", bbsSecret=" + bbsSecret + ", bbsAvailable=" + bbsAvailable
-				+ ", bbsRecommend=" + bbsRecommend + ", bbsVisited=" + bbsVisited + ", reviews=" + reviews + "]";
+				+ ", bbsRecommend=" + bbsRecommend + ", bbsVisited=" + bbsVisited + ", reviews=" + reviews
+				+ ", reviewPage=" + reviewPage + "]";
 	}
-	
-	
-	
+
 }

@@ -4,7 +4,9 @@ function login(){
 	$(location).attr('href', '/bbs/login');
 }
 function writeReview(sessionID){ // 댓글 달기 기능 
-   const bbsId = $(location).attr("search").split("=")[1]; // bbs_id
+   const pathName = $(location).attr('pathname').split('/');
+   const bbsId = pathName[3]; // bbs_id
+
    const reviewContent = $('#review').val();
    const userId = sessionID;
    
@@ -44,8 +46,16 @@ function model_board(data){
     .html(`${bbsContent}`);
 
 
-    //review setting
+    
+}
+/*
+	리뷰를 갱신화하는 메소드를 부분화한다.
+ */
+function refreshReviews(data){
+	 //review setting
+	const userId = data.userID;
     const reviews = data.reviews;
+	console.log('reviews', reviews);
     const reviews_length = reviews.length;
     var html ="";
     for(var i = 0 ; i < reviews_length ; i++){
@@ -59,12 +69,31 @@ function model_board(data){
         `
     }
     // review modeling
-    $('div > ul > li:nth-child(5)')
+    $('#reviews')
     .append(html); 
+}
+function refreshSubReviews(bbsId, data){
+	 //review setting
+	const userId = bbsId;
+    const reviews_length = data.length;
+    var html ="";
+    for(var i = 0 ; i < reviews_length ; i++){
+        const reviewId = data[i].reviewId;
+        const reviewContent = data[i].reviewContent;
+        const reviewDate = data[i].reviewDate;
+        const reviewRecommend = data[i].reviewRecommend;
+        html += 
+        `
+           <p> ${reviewId} ${userId} ${reviewContent}<b> ${reviewDate} 추천수: ${reviewRecommend}</b> <button>삭제</button><button>비추천</button><button>추천</button></p>
+        `
+    }
+    // review modeling
+    $('#reviews')
+    .html(html); 
 }
 
 
-function searchBoardById(bbs_id){
+function searchBoardById(bbs_id){ // 게시판 정보를 bbsid로 조회
     const url = `http://localhost:8080/bbs/api/bbs/${bbs_id}`
     $.ajax({
         method:'get',
@@ -72,13 +101,39 @@ function searchBoardById(bbs_id){
         success: function(data){
             console.log(data);
             model_board(data);
+			refreshReviews(data);
+			bbsReviewPageSet(data.reviewCount);
         }
     })
 }
-
+function requestPageData(page, count){
+	const pathName = $(location).attr('pathname').split('/');
+    const bbs_id = pathName[3];
+	const url = `http://localhost:8080/bbs/api/review/${bbs_id}/${page}/${count}`;
+	$.ajax({
+		method: 'get',
+		url,
+		success:function(data){
+			console.log(data);
+			refreshSubReviews(bbs_id, data);
+		}
+	})
+}
+// review 데이터를 localhost:8080/bbs/api/review/bbs번호/리뷰시작페이지/가져올데이터개수 로 조회.
+// localhost:8080/bbs/api/review/${i+1}
+function bbsReviewPageSet(page){ 
+	/** 여기서 a onclick시 부분 모델링으로 댓글 페이지 전환해줘야함. */ 
+    var html ="< ";
+    for(var i = 0 ; i < page ; i++){
+        html += `<a onclick='requestPageData(${i+1}, 5)'>${i+1}</a>&nbsp;&nbsp;`;
+    }
+    html += " >"
+    $('#page').html(html);
+}
 
 
 $(document).ready(()=>{
-    const bbs_id = $(location).attr('search').split('=')[1];
+	const pathName = $(location).attr('pathname').split('/');
+    const bbs_id = pathName[3];
     searchBoardById(bbs_id);
 })

@@ -34,7 +34,7 @@
               <p> [댓글] </p>
             </li>
         </ul>
-
+		<div id="page"></div>
     </div>
 
     <script src="http://localhost:8080/bbs/resources/js/content.js"></script>

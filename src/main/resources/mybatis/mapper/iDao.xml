@@ -18,8 +18,15 @@
 	
 	
 	<select id="findReviewById" resultType="com.board.www.bbs.dto.Review">
-		select * from review where bbs_id = #{bbsID}
+		select * from review where bbs_id = #{bbsId}
+		order by review_id desc 
+		limit #{page}, #{count}
 	</select>
+	
+	<select id="findRecommendByUserId" resultType="com.board.www.bbs.dto.BbsRecommend">
+		select * from bbs_recommend where bbs_id = #{bbsId}
+	</select>
+	
 	
 	<delete id="deleteBoard" parameterType="int">
 		delete from bbs where bbsID = #{bbsID}
@@ -27,8 +34,11 @@
 	
 	<select id="getList" resultType="com.board.www.bbs.dto.Bbs">
 		select bbsID, bbsTitle, userID, bbsDate, bbsContent, bbs_recommend, bbs_visited 
-		from bbs
+		from bbs 
+		order by bbsId 
+		desc limit #{page}, 5
 	</select>
+	
 	
 	<insert id="write" parameterType="com.board.www.bbs.dto.Bbs">
 		insert into bbs(bbsTitle, userID, bbsContent, bbsSecret, bbsAvailable) 
@@ -40,6 +50,11 @@
 		values(#{bbsId}, #{userId}, #{reviewContent})
 	</insert>
 	
+	
+	<insert id="addRecommend" parameterType="com.board.www.bbs.dto.BbsRecommend">
+		insert into bbs_recommend(bbs_id, user_id, postive, negative) 
+		values(#{bbsId}, #{userId}, #{postive}, #{negative})
+	</insert>
 	
 	<select id="login" resultType="string">
 		select userPassword from user where userID = #{userID}

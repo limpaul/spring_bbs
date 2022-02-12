@@ -26,10 +26,10 @@ FRAMEWORK: SPRING
 
 게시판페이지
 
-![image](https://user-images.githubusercontent.com/37106871/153354551-9c6fdc5f-f928-4111-b9cd-69dbb419888e.png)
+![image](https://user-images.githubusercontent.com/37106871/153693116-d7cbaa0d-58c1-4d88-8eac-73c05610da26.png)
 
 
-![image](https://user-images.githubusercontent.com/37106871/153354614-0b072f4a-3749-43a1-9721-805e8a0a6671.png)
+![image](https://user-images.githubusercontent.com/37106871/153693130-79eecc60-b80e-4c08-b94a-644a5874da6d.png)
 
 
 

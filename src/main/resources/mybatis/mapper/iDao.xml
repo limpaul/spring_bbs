@@ -4,63 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.board.www.bbs.dao.IDao">
+		
 	
-	
-	<select id="findById" resultType="com.board.www.bbs.dto.Bbs">
-		select bbsID, bbsTitle, userID, bbsDate, bbsContent, bbs_recommend, bbs_visited 
-		from bbs 
-		where bbsID = #{bbsID}
+	<select id="userEmailCheck" resultType="string">
+		select userId from user where userEmail = #{userEmail}
 	</select>
 	
-	<select id="findBoardById" resultType="map">
-		select bbsID, bbsSecret from bbs where bbsID = #{bbsID}
+	<select id="userIdCheck" resultType="string">
+		select userId from user where userId = #{userId}
 	</select>
-	
-	
-	<select id="findReviewById" resultType="com.board.www.bbs.dto.Review">
-		select * from review where bbs_id = #{bbsId}
-		order by review_id desc 
-		limit #{page}, #{count}
-	</select>
-	
-	<select id="findRecommendByUserId" resultType="com.board.www.bbs.dto.BbsRecommend">
-		select * from bbs_recommend where bbs_id = #{bbsId}
-	</select>
-	
-	
-	<delete id="deleteBoard" parameterType="int">
-		delete from bbs where bbsID = #{bbsID}
-	</delete>
-	
-	<select id="getList" resultType="com.board.www.bbs.dto.Bbs">
-		select bbsID, bbsTitle, userID, bbsDate, bbsContent, bbs_recommend, bbs_visited 
-		from bbs 
-		order by bbsId 
-		desc limit #{page}, 5
-	</select>
-	
-	
-	<insert id="write" parameterType="com.board.www.bbs.dto.Bbs">
-		insert into bbs(bbsTitle, userID, bbsContent, bbsSecret, bbsAvailable) 
-		values(#{bbsTitle}, #{userID}, #{bbsContent}, #{bbsSecret}, #{bbsAvailable})
-	</insert>
-	
-	<insert id="writeReview" parameterType="com.board.www.bbs.dto.Review">
-		insert into review(bbs_id, user_id, review_content) 
-		values(#{bbsId}, #{userId}, #{reviewContent})
-	</insert>
-	
-	
-	<insert id="addRecommend" parameterType="com.board.www.bbs.dto.BbsRecommend">
-		insert into bbs_recommend(bbs_id, user_id, postive, negative) 
-		values(#{bbsId}, #{userId}, #{postive}, #{negative})
-	</insert>
 	
 	<select id="login" resultType="string">
-		select userPassword from user where userID = #{userID}
+		select userPassword from user where userId = #{userID}
 	</select>
 	
 	<insert id="join">
 		insert into user values(#{userID}, #{userPassword}, #{userName}, #{userGender}, #{userEmail})
 	</insert>
+	
 </mapper>

@@ -31,13 +31,25 @@ public class ApiServiceTest {
 //		apiService.getBoardList(0).forEach(it -> System.out.println(it.toString()));
 //	}
 	@Test
+	public void userEmailCheckTest() {
+		String userEmail = "test@bavcer";
+		Boolean result = apiService.checkEmailList(userEmail);
+		Assert.assertEquals(true, result);
+	}
+	@Test
+	public void userIdCheckTest() {
+		String userId = "test";
+		Boolean result = apiService.checkUserList(userId);
+		Assert.assertEquals(true, result);
+	}
+	@Test
 	public void getList() {
 		System.out.println(apiService.getBoardList(0).toString());;
 	}
 	@Test
 	public void getReviewList() {
 		//getReviewList("게시판번호", "리뷰 시작페이지", "리뷰 데이터 개수")
-		apiService.getReviewList(1, 0, 10).forEach(it -> System.out.println(it.toString()));
+		apiService.getReviewList(1, 1, 10).forEach(it -> System.out.println(it.toString()));
 	}
 	@Ignore
 	@Test

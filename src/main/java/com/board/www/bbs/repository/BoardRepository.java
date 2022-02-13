@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.board.www.bbs.dao.BbsDao;
+import com.board.www.bbs.dao.BoardDao;
 import com.board.www.bbs.dao.IDao;
 import com.board.www.bbs.dto.Bbs;
 import com.board.www.bbs.dto.Review;
@@ -15,6 +16,7 @@ import com.board.www.bbs.dto.Review;
 public class BoardRepository {
 	//private BbsDao bbsDao;
 	private IDao iDao;
+	private BoardDao myBatisBoardDao;
 	private SqlSession sqlSession;
 	public BoardRepository() {
 
@@ -23,6 +25,7 @@ public class BoardRepository {
 	public BoardRepository(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 		iDao = this.sqlSession.getMapper(IDao.class);
+		myBatisBoardDao = this.sqlSession.getMapper(BoardDao.class);
 	}
 	
 	
@@ -30,10 +33,10 @@ public class BoardRepository {
 	public int bbsWrite(Bbs bbs) {
 		//return bbsDao.write(bbs);
 		
-		return iDao.write(bbs);
+		return myBatisBoardDao.write(bbs);
 	}
 	public Bbs findById(int bbsID){
-		Bbs bbs = iDao.findById(bbsID);
+		Bbs bbs = myBatisBoardDao.findById(bbsID);
 		return bbs;
 	}
 	

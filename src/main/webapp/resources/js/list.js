@@ -1,5 +1,5 @@
 function writeBoard(bbsID){
-    var inputString = prompt('해당 게시글 비밀번호를 입력하세요', '해당 게시글 비밀번호를 입력하세요');
+    var inputString = prompt('�대�� 寃���湲� 鍮�諛�踰��몃�� ���ν���몄��', '�대�� 寃���湲� 鍮�諛�踰��몃�� ���ν���몄��');
     if(inputString=='' || inputString == null){
         return;
     }
@@ -15,7 +15,7 @@ function writeBoard(bbsID){
         data: JSON.stringify(inputData),
         success: function(data){
             if(data == 'false'){
-                alert("비밀번호가 올바르지 않습니다!.");
+                alert("삭제되었습니다.");
             }
             location.reload();
         }
@@ -52,7 +52,7 @@ function bbsPageSet(page){
     for(var i = 0 ; i < page ; i++){
         html += `<a href='localhost:8080/bbs/api/bbs_list?page=${i+1}'>${i+1}</a>`;
     }
-    html += "&nbsp;&nbsp>;"
+    html += "&nbsp;&nbsp;>"
     $('#page').html(html);
 }
 

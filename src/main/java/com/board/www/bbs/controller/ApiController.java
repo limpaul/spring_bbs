@@ -1,5 +1,6 @@
 package com.board.www.bbs.controller;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,16 @@ public class ApiController {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@GetMapping("/user/userCheckEmail/{userEmail}")
+	public Boolean checkEmail(@PathVariable("userEmail") String userEmail) {;
+		return apiService.checkEmailList(new String(Base64.getDecoder().decode(userEmail)));
+	}
+	
+	@GetMapping("/user/userCheckId/{userId}")
+	public Boolean checkUser(@PathVariable("userId") String userId) {
+		return apiService.checkUserList(userId);
+	}
 	
 	@PostMapping("/removeContent")
 	public String test(@RequestBody Map<String, String> data){

@@ -9,7 +9,6 @@ function writeReview(sessionID){ // 댓글 달기 기능
 
    const reviewContent = $('#review').val();
    const userId = sessionID;
-   
    if(sessionID == null){
 		$(location).attr('href', '/bbs/login');
    }
@@ -60,31 +59,33 @@ function refreshReviews(data){
     var html ="";
     for(var i = 0 ; i < reviews_length ; i++){
         const reviewId = reviews[i].reviewId;
+		const reviewUserId = reviews[i].userId;
         const reviewContent = reviews[i].reviewContent;
         const reviewDate = reviews[i].reviewDate;
         const reviewRecommend = reviews[i].reviewRecommend;
         html += 
         `
-           <p> ${reviewId} ${userId} ${reviewContent}<b> ${reviewDate} 추천수: ${reviewRecommend}</b> <button>삭제</button><button>비추천</button><button>추천</button></p>
+           <p> ${reviewId} ${reviewUserId} ${reviewContent}<b> ${reviewDate} 추천수: ${reviewRecommend}</b> <button>삭제</button><button>비추천</button><button>추천</button></p>
         `
     }
     // review modeling
     $('#reviews')
     .append(html); 
 }
-function refreshSubReviews(bbsId, data){
+function refreshSubReviews(data){
 	 //review setting
-	const userId = bbsId;
+
     const reviews_length = data.length;
     var html ="";
     for(var i = 0 ; i < reviews_length ; i++){
         const reviewId = data[i].reviewId;
+		const reviewUserId = data[i].userId;
         const reviewContent = data[i].reviewContent;
         const reviewDate = data[i].reviewDate;
         const reviewRecommend = data[i].reviewRecommend;
         html += 
         `
-           <p> ${reviewId} ${userId} ${reviewContent}<b> ${reviewDate} 추천수: ${reviewRecommend}</b> <button>삭제</button><button>비추천</button><button>추천</button></p>
+           <p> ${reviewId} ${reviewUserId} ${reviewContent}<b> ${reviewDate} 추천수: ${reviewRecommend}</b> <button>삭제</button><button>비추천</button><button>추천</button></p>
         `
     }
     // review modeling
@@ -115,7 +116,7 @@ function requestPageData(page, count){
 		url,
 		success:function(data){
 			console.log(data);
-			refreshSubReviews(bbs_id, data);
+			refreshSubReviews(data);
 		}
 	})
 }

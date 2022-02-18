@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.board.www.bbs.dao.BoardDao;
 import com.board.www.bbs.dao.IDao;
 import com.board.www.bbs.dto.Bbs;
+import com.board.www.bbs.dto.BbsLikeUnLike;
 import com.board.www.bbs.dto.BbsRecommend;
 import com.board.www.bbs.dto.BoardList;
 import com.board.www.bbs.dto.Review;
@@ -49,6 +50,9 @@ public class ApiService {
 		BoardList boardList = new BoardList();
 		boardList.setBbs(myBatisBoardDao.getList(page));
 		boardList.setBbsPage(myBatisBoardDao.getBbsCount(5));
+		boardList.getBbs().forEach(bbs -> {
+			bbs.setBbsRecommend(countBbsRecommend(bbs.getBbsID()).getPostiveNum());
+		});
 		return boardList;
 	}
 
@@ -103,12 +107,7 @@ public class ApiService {
 		return recommends;
 	}
 
-	public String addRecommend(int bbsId, BbsRecommend rmd) {
-		// 해당 값이 있는지?
-		rmd.setBbsId(bbsId);
-		myBatisBoardDao.addRecommend(rmd);
-		return "{}";
-	}
+
 	
 	public int getBbsReviewCount(int bbsId, int count) { // 총 리뷰페이지가 몇개인가?
 		 // 기본적으로 5개 기준으로 reviewPage를 몇개 가져올것인지 
@@ -125,6 +124,28 @@ public class ApiService {
 	public int getBbsCount(int count) {
 		return myBatisBoardDao.getBbsCount(count);
 	}
-	
+	/* 추천 기능  */
+	public Boolean recommend(int bbsId, BbsRecommend bbsRecommend) {
+		bbsRecommend.setBbsId(bbsId);
+		Boolean result = myBatisBoardDao.isRecommendable(bbsRecommend);
+		if(result == null || result == true) {
+			return myBatisBoardDao.addRecommend(bbsRecommend);
+		}
+		if(result == false) {
+			return false;
+		}
+		return false;
+	}
+	/* 해당 게시글 추천 개수 */
+	public BbsLikeUnLike countBbsRecommend(int bbsId) {
+		int postive = myBatisBoardDao.findBbsRecommendNumById(bbsId, true);
+		int negative = myBatisBoardDao.findBbsRecommendNumById(bbsId, false);
+		BbsLikeUnLike bbsLikeUnLike = new BbsLikeUnLike();
+		bbsLikeUnLike.setBbsId(bbsId);
+		bbsLikeUnLike.setPostiveNum(postive);
+		bbsLikeUnLike.setNegativeNum(negative);
+		
+		return bbsLikeUnLike;
+	}
 	
 }

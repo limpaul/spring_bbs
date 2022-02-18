@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.board.www.bbs.dto.BbsLikeUnLike;
 import com.board.www.bbs.dto.BbsRecommend;
 import com.board.www.bbs.dto.Review;
 
@@ -68,14 +69,23 @@ public class ApiServiceTest {
 		apiService.findRecommendById(1, rmd);
 	
 	}
-	@Ignore
 	@Test
-	public void pushRecommend() { // 좋아요 싫어요 눌렀을 때 db가 동작을 하는가?
-		BbsRecommend rmd = new BbsRecommend();
-		rmd.setUserId("toto");
-		rmd.setPostive(1); // 추천 눌렀음 
-		rmd.setNegative(0);
-		apiService.addRecommend(1, rmd);
+	public void isRecommend() { // 좋아요 싫어요 눌렀을 때 db가 동작을 하는가?
+		BbsRecommend bbsRecommend = new BbsRecommend();
+		bbsRecommend.setUserId("test");
+		System.out.println(apiService.recommend(1, bbsRecommend));
+	}
+	@Test
+	public void addRecommend() { // 좋아요 싫어요 눌렀을 때 db가 동작을 하는가?
+		BbsRecommend bbsRecommend = new BbsRecommend();
+		bbsRecommend.setUserId("toto");
+		bbsRecommend.setNegative(true);
+		System.out.println(apiService.recommend(1, bbsRecommend));
+	}
+	@Test
+	public void recommendCount() {
+		BbsLikeUnLike bbsLikeUnLike = apiService.countBbsRecommend(1);
+		System.out.println(bbsLikeUnLike);
 	}
 	@Test
 	public void bbsCountTest() {
@@ -94,5 +104,11 @@ public class ApiServiceTest {
 		int result = apiService.getBbsReviewCount(1, 5);
 		System.out.println(result);
 	}
-	
+	@Test
+	public void test() {
+		Boolean result = null;
+		if(result == null || result == false) {
+			System.out.println("here is");
+		}
+	}
 }

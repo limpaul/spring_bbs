@@ -13,19 +13,25 @@
         <ul>
             <li>제목</li>
             <li>내용</li>
-            <li>
-                <button>추천</button>
-                <button>비추천</button>
-                <button>삭제</button>
-            </li>
+           
             <%
             	String sessionID = (String)session.getAttribute("userID");
             	if(sessionID == null){
             %>
+            	 <li>
+	                <button id="like" onclick="login()">추천</button>
+	                <button id="like" onclick="login()">비추천</button>
+                	<button>삭제</button>
+            	</li>
             	<li><input id="review" type="text" placeholder="write review"><button onclick="login()">댓글달기</button></li>
             <%
             	}else{
             %>
+            	 <li>
+	                <button id="like" onclick="sendRecommend('<%=sessionID%>', true)">추천</button>
+	                <button id="like" onclick="sendRecommend('<%=sessionID%>', false)">비추천</button>
+	                <button>삭제</button>
+            	</li>
             	<li><input id="review" type="text" placeholder="write review"><button onclick="writeReview('<%=sessionID%>')">댓글달기</button></li>
             <%
             	}

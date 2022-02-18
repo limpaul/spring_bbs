@@ -16,9 +16,22 @@
 		from bbs;
 	</select>
 	
+	<select id="isRecommendable" resultType="boolean">
+		select isRecommend
+		from bbs_recommend
+		where bbs_id = #{bbsId} and user_id = #{userId};
+	</select>
+	
+	<select id="findBbsRecommendNumById" resultType="int">
+		select count(*)
+		from bbs_recommend
+		where bbs_id = #{bbsId} and postive = #{type};
+	</select>
+	
 	<insert id="addRecommend" parameterType="com.board.www.bbs.dto.BbsRecommend">
-		insert into bbs_recommend(bbs_id, user_id, postive, negative) 
-		values(#{bbsId}, #{userId}, #{postive}, #{negative})
+		insert into 
+		bbs_recommend(bbs_id, user_id, postive, negative, isRecommend) 
+		values(#{bbsId}, #{userId}, #{postive}, #{negative}, false);
 	</insert>
 	
 	<insert id="writeReview" parameterType="com.board.www.bbs.dto.Review">

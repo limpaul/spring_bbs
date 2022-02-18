@@ -50,12 +50,7 @@ public class ApiController {
 		
 		return apiService.findBoardById(bbsId);
 	}
-	
-	@PostMapping("/bbs/{bbsId}/recommend")
-	public String recommed(@PathVariable int bbsId, @RequestBody BbsRecommend bbsRecommend) {
-		return apiService.addRecommend(bbsId, bbsRecommend);
-	}
-	
+		
 	@GetMapping("/bbs_list")
 	public BoardList freeListPage() { // 페이지 받아온다
 		return apiService.getBoardList(0);
@@ -74,6 +69,10 @@ public class ApiController {
 			,@RequestBody Review review) {
 		apiService.writeReview(bbsId, review);
 		return "{}";
+	}
+	@PostMapping("/recommend/{bbsId}")
+	public Boolean recommend(@PathVariable int bbsId, @RequestBody BbsRecommend bbsRecommend) {
+		return apiService.recommend(bbsId, bbsRecommend);
 	}
 	
 }

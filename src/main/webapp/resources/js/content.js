@@ -132,6 +132,30 @@ function bbsReviewPageSet(page){
     $('#page').html(html);
 }
 
+function sendRecommend(userId, type){
+    /** userId = 'aaa' type= 1  */
+  	const pathName = $(location).attr('pathname').split('/');
+	const bbs_id = pathName[3];
+    const url = `http://localhost:8080/bbs/api/recommend/${bbs_id}`;
+    const data = {
+        bbsId: bbs_id,
+        userId: userId,
+        postive: type?true:false,
+        negative: type?false:true,
+    }
+    $.ajax({
+        method: 'post',
+        contentType : "application/json; charset=utf-8",
+        url,
+        data: JSON.stringify(data),
+        success: function(data){
+            if(data === false){
+				alert("이미 추천하셨습니다.");
+			}
+        }
+    });
+
+}
 
 $(document).ready(()=>{
 	const pathName = $(location).attr('pathname').split('/');
